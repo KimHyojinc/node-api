@@ -1,0 +1,1055 @@
+{
+  "/user": {
+    "get": {
+      "tags": ["User"],
+      "summary": "User Info",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "nickname": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "tags": ["User"],
+      "summary": "회원 탈퇴",
+      "produces": ["application/json"],
+      "responses": {
+        "204": {
+          "description": "회원 탈퇴 성공"
+        }
+      }
+    }
+  },
+  "/user/sign-up": {
+    "post": {
+      "tags": ["User"],
+      "summary": "회원가입",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "required": true
+                },
+                "password": {
+                  "type": "string",
+                  "required": true
+                },
+                "nickname": {
+                  "type": "string",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "successful operation"
+        }
+      }
+    }
+  },
+  "/user/sign-in": {
+    "post": {
+      "tags": ["User"],
+      "summary": "이메일 로그인",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "required": true
+                },
+                "password": {
+                  "type": "string",
+                  "required": true
+                },
+                "appToken": {
+                  "type": "string",
+                  "default": 1234567890,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userIdx": {
+                    "type": "number"
+                  },
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "userImage": {
+                    "$ref": "../schema/image.json"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "cart": {
+                    "type": "number"
+                  },
+                  "author": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/sns-sign-in": {
+    "post": {
+      "tags": ["User"],
+      "summary": "SNS 로그인",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "required": true
+                },
+                "type": {
+                  "type": "integer",
+                  "default": 2,
+                  "required": true
+                },
+                "appToken": {
+                  "type": "string",
+                  "default": 1234567890,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userIdx": {
+                    "type": "number"
+                  },
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "userImage": {
+                    "$ref": "../schema/image.json"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "cart": {
+                    "type": "number"
+                  },
+                  "author": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/auto-login": {
+    "post": {
+      "tags": ["User"],
+      "summary": "자동 로그인",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "appToken": {
+                  "type": "string",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userIdx": {
+                    "type": "number"
+                  },
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "userImage": {
+                    "$ref": "../schema/image.json"
+                  },
+                  "token": {
+                    "type": "string"
+                  },
+                  "cart": {
+                    "type": "number"
+                  },
+                  "author": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/check-email": {
+    "post": {
+      "tags": ["User"],
+      "summary": "이메일 중복확인",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "사용가능한 이메일 입니다.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "data": {
+                  "type": "string;"
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "이메일을 입력해주세요.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "data": {
+                  "type": "string;"
+                }
+              }
+            }
+          }
+        },
+        "409": {
+          "description": "이미 사용중인 이메일 입니다.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "data": {
+                  "type": "string;"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/check-nickname": {
+    "post": {
+      "tags": ["User"],
+      "summary": "닉네임 중복확인",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nickname": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "사용가능한 닉네임 입니다.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "data": {
+                  "type": "string;"
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "닉네임을 입력해주세요.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "data": {
+                  "type": "string;"
+                }
+              }
+            }
+          }
+        },
+        "409": {
+          "description": "이미 사용중인 닉네임 입니다.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "data": {
+                  "type": "string;"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/profile": {
+    "put": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["User"],
+      "summary": "프로필 수정",
+      "produces": ["multipart/form-data"],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nickname": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "reset": {
+                  "type": "boolean",
+                  "default": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "프로필 수정 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/check-password": {
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["User"],
+      "summary": "현재 비밀번호 확인",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "비밀번호 확인 완료"
+        }
+      }
+    }
+  },
+  "/user/password": {
+    "put": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["User"],
+      "summary": "비밀번호 변경",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "비밀번호 변경 완료"
+        }
+      }
+    }
+  },
+  "/user/ask-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Ask"],
+      "summary": "내 ASK 목록",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation"
+        }
+      }
+    }
+  },
+  "/user/like-product-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내 좋아요 상품 목록",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schema/productList.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/like-board-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내 좋아요 게시물 목록",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "schema": {
+            "type": "number",
+            "enum": [1, 2, 3]
+          },
+          "default": 2,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idx": {
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "subject": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "number"
+                  },
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "isLike": {
+                    "type": "boolean"
+                  },
+                  "likeCount": {
+                    "type": "number"
+                  },
+                  "commentCount": {
+                    "type": "number"
+                  },
+                  "createdAt": {
+                    "type": "boolean"
+                  },
+                  "image": {
+                    "$ref": "../schema/image.json"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/reply-board-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내가 댓글 단 게시물 목록",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "type": "number",
+          "schema": {
+            "enum": [2, 3, 4]
+          },
+          "default": 2,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idx": {
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "number"
+                  },
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "isLike": {
+                    "type": "boolean"
+                  },
+                  "likeCount": {
+                    "type": "number"
+                  },
+                  "commentCount": {
+                    "type": "number"
+                  },
+                  "createdAt": {
+                    "type": "boolean"
+                  },
+                  "image": {
+                    "$ref": "../schema/image.json"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/my-board-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내가 쓴 게시물 목록",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "type": "number",
+          "schema": {
+            "enum": [1, 2, 3, 4]
+          },
+          "default": 2,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "내가 쓴 게시글 리스트"
+        }
+      }
+    }
+  },
+  "/user/my-comment-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내가 작성할수 있는 리뷰 목록",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        },
+        {
+          "name": "isWrite",
+          "in": "query",
+          "type": "boolean",
+          "schema": {
+            "enum": [true, false]
+          },
+          "default": true,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "내가 작성가능한 코멘트 리스트"
+        }
+      }
+    }
+  },
+  "/user/my-push-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내 푸시 히스토리",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "내 푸시 히스토리 조회성공"
+        }
+      }
+    }
+  },
+  "/user/my-push-count": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내 안읽은 알람수",
+      "responses": {
+        "200": {
+          "description": "내 안읽은 알람수"
+        }
+      }
+    }
+  },
+  "/user/delivery": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내 배송지 목록",
+      "responses": {
+        "200": {
+          "description": "내가 쓴 게시글 리스트",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "recipient": {
+                      "type": "string"
+                    },
+                    "hp": {
+                      "type": "string"
+                    },
+                    "zipcode": {
+                      "type": "string"
+                    },
+                    "address1": {
+                      "type": "string"
+                    },
+                    "address2": {
+                      "type": "string"
+                    },
+                    "memo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내 배송지 저장",
+      "description": "name = 배송지명(집/회사/기타), hp = 휴대폰번호, zipcode = 우편번호, address1 = 주소, address2 = 상세주소, memo = 배송메모",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "recipient": {
+                  "type": "string"
+                },
+                "hp": {
+                  "type": "string"
+                },
+                "zipcode": {
+                  "type": "string"
+                },
+                "address1": {
+                  "type": "string"
+                },
+                "address2": {
+                  "type": "string"
+                },
+                "memo": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "내가 쓴 게시글 리스트"
+        }
+      }
+    }
+  },
+  "/user/point": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내 포인트",
+      "responses": {
+        "200": {
+          "description": "내 포인트",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/user/my-count-info": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["My"],
+      "summary": "마이페이지 정보 표기",
+      "responses": {
+        "200": {
+          "description": "정보표기성공"
+        }
+      }
+    }
+  },
+  "/user/my-point-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "tags": ["My"],
+      "summary": "내 포인트 목록",
+      "responses": {
+        "200": {
+          "description": "내 포인트 목록 조회성공"
+        }
+      }
+    }
+  },
+  "/user/blind": {
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["User"],
+      "summary": "유저차단",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "차단 완료"
+        }
+      }
+    }
+  },
+  "/user/mail": {
+    "get": {
+      "tags": ["User"],
+      "summary": "메일보내기",
+      "responses": {
+        "200": {
+          "description": "메일보내기"
+        }
+      }
+    }
+  },
+  "/user/push": {
+    "put": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["User"],
+      "summary": "푸시 상태 변경",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "number",
+                  "default": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "푸시 상태 변경 완료"
+        }
+      }
+    }
+  },
+  "/user/test": {
+    "get": {
+      "tags": ["User"],
+      "summary": "테스트",
+      "responses": {
+        "200": {
+          "description": "테스트"
+        }
+      }
+    }
+  }
+}

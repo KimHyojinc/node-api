@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "properties": {
+    "idx": {
+      "type": "number"
+    },
+    "category": {
+      "type": "number",
+      "description": "1=도자공예, 2=유리공예, 3=금속공예, 4=목공예, 5=섬유공예, 6=가죽공예, 7=기능공예"
+    },
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "isShow": {
+      "type": "boolean",
+      "description": "상품 노출 여부"
+    },
+    "isSell": {
+      "type": "boolean",
+      "description": "상품 판매 여부"
+    },
+    "isNew": {
+      "type": "boolean",
+      "description": "상품 신상 여부"
+    },
+    "stock": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": null
+        }
+      ],
+      "description": "상품 재고 null=무제한 , 0=재고 없음, 0<재고 있음"
+    },
+    "likeCount": {
+      "type": "number",
+      "description": "상품 좋아요 수"
+    },
+    "reviewCount": {
+      "type": "number",
+      "description": "상품 리뷰 수"
+    },
+    "authorName": {
+      "type": "string",
+      "description": "작가 이름"
+    },
+    "isLike": {
+      "type": "boolean",
+      "description": "좋아요 여부"
+    },
+    "image": {
+      "$ref": "./image.json"
+    }
+  }
+}

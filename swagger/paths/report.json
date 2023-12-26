@@ -1,0 +1,46 @@
+{
+  "/report": {
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Report"],
+      "summary": "신고 작성",
+      "description": "type = board , reply",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "board",
+                  "required": true
+                },
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "reason": {
+                  "type": "string",
+                  "default": "신고합니다.",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "신고 되었습니다."
+        }
+      }
+    }
+  }
+}

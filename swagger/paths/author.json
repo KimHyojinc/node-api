@@ -1,0 +1,155 @@
+{
+  "/author": {
+    "get": {
+      "tags": ["Author"],
+      "summary": "작가 정보",
+      "produces": ["application/json"],
+      "parameters": [{ "name": "idx", "in": "query", "type": "number", "default": 1, "required": true }],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idx": { "type": "string" },
+                  "name": { "type": "string" },
+                  "studio": { "type": "string" },
+                  "greetings": { "type": "string" },
+                  "productCount": { "type": "number" },
+                  "articleCount": { "type": "number" },
+                  "major": { "type": "string" },
+                  "record": {
+                    "type": "array",
+                    "items": { "type": "object", "properties": { "year": { "type": "string" }, "content": { "type": "string" } } }
+                  },
+                  "exhibition": {
+                    "type": "array",
+                    "items": { "type": "object", "properties": { "year": { "type": "string" }, "content": { "type": "string" } } }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": ["Author"],
+      "summary": "작가 회원가입 신청.",
+      "produces": ["multipart/form-data"],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string", "required": true },
+                "password": { "type": "string", "required": true },
+                "name": { "type": "string", "required": true },
+                "greetings": { "type": "string", "required": true },
+                "studio": { "type": "string", "required": true },
+                "tel": { "type": "string", "required": true },
+                "major": { "type": "string", "required": true },
+                "zipcode": { "type": "string", "required": true },
+                "address1": { "type": "string", "required": true },
+                "address2": { "type": "string", "required": true },
+                "business_num": { "type": "string", "required": true },
+                "profile": { "type": "string", "format": "binary", "required": true }
+              }
+            }
+          }
+        }
+      },
+      "responses": { "200": { "description": "successful operation", "content": { "application/json": { "schema": { "data": { "type": "string" } } } } } }
+    }
+  },
+  "/author/pass": {
+    "put": {
+      "tags": ["Author"],
+      "summary": "작가 승인.",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": { "application/json": { "schema": { "type": "object", "properties": { "idx": { "type": "integer", "required": true } } } } }
+      },
+      "responses": { "200": { "description": "successful operation", "content": { "application/json": { "schema": { "data": { "type": "string" } } } } } }
+    }
+  },
+  "/author/product-list": {
+    "get": {
+      "tags": ["Author"],
+      "summary": "작가 상품 리스트",
+      "produces": ["application/json"],
+      "parameters": [
+        { "name": "idx", "in": "query", "type": "number", "default": 1, "required": true },
+        {
+          "name": "filter",
+          "in": "query",
+          "schema": { "type": "string", "enum": ["like", "recently", "review", "price"] },
+          "default": "like",
+          "required": true
+        },
+        { "name": "page", "in": "query", "type": "number", "default": 1, "required": true }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": { "total": { "type": "number" }, "data": { "type": "array", "items": { "$ref": "../schema/productList.json" } } }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/author/article-list": {
+    "get": {
+      "tags": ["Author"],
+      "summary": "작가 아티클 리스트",
+      "produces": ["application/json"],
+      "parameters": [
+        { "name": "idx", "in": "query", "type": "number", "default": 1, "required": true },
+        { "name": "filter", "in": "query", "schema": { "type": "string", "enum": ["like", "recently"] }, "default": "like", "required": true },
+        { "name": "page", "in": "query", "type": "number", "default": 1, "required": true }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": { "application/json": { "schema": { "type": "object", "properties": { "total": { "type": "number" }, "data": { "type": "array" } } } } }
+        }
+      }
+    }
+  },
+  "/author/ask": {
+    "post": {
+      "tags": ["Author"],
+      "summary": "작가 ASK 답변",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": { "idx": { "type": "number", "required": true }, "content": { "type": "string", "required": true } }
+            }
+          }
+        }
+      },
+      "responses": { "200": { "description": "작가 ASK 문의 답변", "content": { "application/json": { "schema": { "data": { "type": "string" } } } } } }
+    }
+  },
+
+  "/author/today": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "Today Author",
+      "produces": ["application/json"],
+      "responses": { "200": { "description": "오늘의 작가" } }
+    }
+  }
+}

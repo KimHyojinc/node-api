@@ -1,0 +1,4 @@
+{
+  "type": "object",
+  "properties": { "idx": { "type": "integer" }, "name": { "type": "string" }, "greetings": { "type": "string" }, "image": { "$ref": "./image.json" } }
+}

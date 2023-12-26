@@ -1,0 +1,307 @@
+{
+  "/order/list": {
+    "get": {
+      "tags": ["Order"],
+      "summary": "주문목록",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "description": "페이지 번호",
+          "required": false,
+          "schema": {
+            "type": "number"
+          },
+          "default": 1
+        }
+      ],
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "목록 조회 성공"
+        }
+      }
+    }
+  },
+  "/order": {
+    "get": {
+      "tags": ["Order"],
+      "summary": "주문 관리 목록",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "description": "페이지 번호",
+          "required": false,
+          "schema": {
+            "type": "number"
+          },
+          "default": 1
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "목록 조회 성공"
+        }
+      }
+    },
+    "post": {
+      "tags": ["Order"],
+      "summary": "주문하기",
+      "produces": ["application/json"],
+      "description": "idxs = 카트IDX배열, price=아임포트 결제액, point=포인트사용액, coupon=couponIDX, delivery=배송비총합, imp=아임포트영수증번호",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idxs": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "default": [1, 2]
+                },
+                "price": {
+                  "type": "number",
+                  "default": 0
+                },
+                "recipient": {
+                  "type": "string",
+                  "default": "디몬이"
+                },
+                "hp": {
+                  "type": "string",
+                  "default": "01000000000"
+                },
+                "pay": {
+                  "type": "string",
+                  "default": "card"
+                },
+                "point": {
+                  "type": "number",
+                  "default": 0
+                },
+                "coupon": {
+                  "type": "number",
+                  "default": 1
+                },
+                "delivery": {
+                  "type": "number",
+                  "default": 3000
+                },
+                "zipcode": {
+                  "type": "string",
+                  "default": 58342
+                },
+                "address1": {
+                  "type": "string",
+                  "default": "부산 광역시"
+                },
+                "address2": {
+                  "type": "string",
+                  "default": "디몬스터"
+                },
+                "memo": {
+                  "type": "string",
+                  "default": "배송메모"
+                },
+                "imp": {
+                  "type": "string",
+                  "default": "onpoom-101010"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "상품 주문 완료."
+        }
+      }
+    }
+  },
+  "/order/delivery": {
+    "post": {
+      "tags": ["Order"],
+      "summary": "상품 송장번호 입력",
+      "produces": ["application/json"],
+      "description": "상품 송장번호를 입력합니다. idx = cart.idx , company= 스마트 API 참조 택배사 고유번호 ex ) 04 = 대한통운",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1
+                },
+                "company": {
+                  "type": "string",
+                  "default": "04"
+                },
+                "number": {
+                  "type": "string",
+                  "default": "123123123"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "송장번호 입력완료."
+        }
+      }
+    }
+  },
+  "/order/confirm": {
+    "post": {
+      "tags": ["Order"],
+      "summary": "구매 확정",
+      "produces": ["application/json"],
+      "description": "cartIdx를 입력하세요. 구매확정",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "구매확정 완료."
+        }
+      }
+    }
+  },
+  "/order/exchange": {
+    "post": {
+      "tags": ["Order"],
+      "summary": "교환 요청",
+      "produces": ["application/json"],
+      "description": "cartIdx를 입력하세요. 교환요청",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "교환요청 완료."
+        }
+      }
+    }
+  },
+  "/order/refund": {
+    "post": {
+      "tags": ["Order"],
+      "summary": "반품 요청",
+      "produces": ["application/json"],
+      "description": "cartIdx를 입력하세요. 반품요청",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "반품요청 완료."
+        }
+      }
+    }
+  },
+  "/order/cancel": {
+    "post": {
+      "tags": ["Order"],
+      "summary": "취소 요청",
+      "produces": ["application/json"],
+      "description": "cartIdx를 입력하세요. 취소",
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "reason": {
+                  "type": "string",
+                  "default": "사유입력",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "반품요청 완료."
+        }
+      }
+    }
+  },
+  "/order/detail": {
+    "get": {
+      "tags": ["Order"],
+      "summary": "주문 상세",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "cartIdx",
+          "in": "query",
+          "description": "페이지 번호",
+          "required": false,
+          "schema": {
+            "type": "number"
+          },
+          "default": 1
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "송장번호 입력완료."
+        }
+      }
+    }
+  }
+}

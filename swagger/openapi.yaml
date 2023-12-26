@@ -1,0 +1,365 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "온품 API",
+    "description": "온품 API 문서입니다"
+  },
+  "servers": [
+    {
+      "description": "Staging Server",
+      "url": "https://onpoom.kr/api"
+    },
+    {
+      "description": "Dev Server",
+      "url": "http://localhost:8080/api"
+    }
+  ],
+  
+  "paths": {
+    "/user": {
+      "$ref": "./paths/user.json#/~1user"
+    },
+    "/user/sign-up": {
+      "$ref": "./paths/user.json#/~1user~1sign-up"
+    },
+    "/user/sign-in": {
+      "$ref": "./paths/user.json#/~1user~1sign-in"
+    },
+    "/user/sns-sign-in": {
+      "$ref": "./paths/user.json#/~1user~1sns-sign-in"
+    },
+    "/user/auto-login": {
+      "$ref": "./paths/user.json#/~1user~1auto-login"
+    },
+    "/user/check-email": {
+      "$ref": "./paths/user.json#/~1user~1check-email"
+    },
+    "/user/check-nickname": {
+      "$ref": "./paths/user.json#/~1user~1check-nickname"
+    },
+    "/user/profile": {
+      "$ref": "./paths/user.json#/~1user~1profile"
+    },
+    "/user/check-password": {
+      "$ref": "./paths/user.json#/~1user~1check-password"
+    },
+    "/user/password": {
+      "$ref": "./paths/user.json#/~1user~1password"
+    },
+    "/user/ask-list": {
+      "$ref": "./paths/user.json#/~1user~1ask-list"
+    },
+    "/user/like-product-list": {
+      "$ref": "./paths/user.json#/~1user~1like-product-list"
+    },
+    "/user/like-board-list": {
+      "$ref": "./paths/user.json#/~1user~1like-board-list"
+    },
+    "/user/my-board-list": {
+      "$ref": "./paths/user.json#/~1user~1my-board-list"
+    },
+    "/user/my-comment-list": {
+      "$ref": "./paths/user.json#/~1user~1my-comment-list"
+    },
+    "/user/reply-board-list": {
+      "$ref": "./paths/user.json#/~1user~1reply-board-list"
+    },
+    "/user/delivery": {
+      "$ref": "./paths/user.json#/~1user~1delivery"
+    },
+    "/user/point": {
+      "$ref": "./paths/user.json#/~1user~1point"
+    },
+    "/user/my-point-list": {
+      "$ref": "./paths/user.json#/~1user~1my-point-list"
+    },
+    "/user/my-push-list": {
+      "$ref": "./paths/user.json#/~1user~1my-push-list"
+    },
+    "/user/my-push-count": {
+      "$ref": "./paths/user.json#/~1user~1my-push-count"
+    },
+    "/user/my-count-info": {
+      "$ref": "./paths/user.json#/~1user~1my-count-info"
+    },
+    "/user/blind": {
+      "$ref": "./paths/user.json#/~1user~1blind"
+    },
+    "/user/mail": {
+      "$ref": "./paths/user.json#/~1user~1mail"
+    },
+    "/user/push": {
+      "$ref": "./paths/user.json#/~1user~1push"
+    },
+    "/user/test": {
+      "$ref": "./paths/user.json#/~1user~1test"
+    },
+    "/search/keyword-list": {
+      "$ref": "./paths/search.json#/~1search~1keyword-list"
+    },
+    "/search/keyword": {
+      "$ref": "./paths/search.json#/~1search~1keyword"
+    },
+    "/search/list": {
+      "$ref": "./paths/search.json#/~1search~1list"
+    },
+    "/product": {
+      "$ref": "./paths/product.json#/~1product"
+    },
+    "/product/list": {
+      "$ref": "./paths/product.json#/~1product~1list"
+    },
+    "/product/trend": {
+      "$ref": "./paths/product.json#/~1product~1trend"
+    },
+    "/product/recommend": {
+      "$ref": "./paths/product.json#/~1product~1recommend"
+    },
+    "/product/today": {
+      "$ref": "./paths/product.json#/~1product~1today"
+    },
+    "/product/new": {
+      "$ref": "./paths/product.json#/~1product~1new"
+    },
+    "/product/popular": {
+      "$ref": "./paths/product.json#/~1product~1popular"
+    },
+    "/product/like": {
+      "$ref": "./paths/product.json#/~1product~1like"
+    },
+    "/product/ask": {
+      "$ref": "./paths/product.json#/~1product~1ask"
+    },
+    "/cart": {
+      "$ref": "./paths/cart.json#/~1cart"
+    },
+    "/cart/temp": {
+      "$ref": "./paths/cart.json#/~1cart~1temp"
+    },
+    "/cart/delivery": {
+      "$ref": "./paths/cart.json#/~1cart~1delivery"
+    },
+    "/order": {
+      "$ref": "./paths/order.json#/~1order"
+    },
+    "/order/list": {
+      "$ref": "./paths/order.json#/~1order~1list"
+    },
+    "/order/detail": {
+      "$ref": "./paths/order.json#/~1order~1detail"
+    },
+    "/order/delivery": {
+      "$ref": "./paths/order.json#/~1order~1delivery"
+    },
+    "/order/confirm": {
+      "$ref": "./paths/order.json#/~1order~1confirm"
+    },
+    "/order/cancel": {
+      "$ref": "./paths/order.json#/~1order~1cancel"
+    },
+    "/order/exchange": {
+      "$ref": "./paths/order.json#/~1order~1exchange"
+    },
+    "/order/refund": {
+      "$ref": "./paths/order.json#/~1order~1refund"
+    },
+    "/comment": {
+      "$ref": "./paths/comment.json#/~1comment"
+    },
+    "/exhibition": {
+      "$ref": "./paths/exhibition.json#/~1exhibition"
+    },
+    "/exhibition/list": {
+      "$ref": "./paths/exhibition.json#/~1exhibition~1list"
+    },
+    "/coupon/list": {
+      "$ref": "./paths/coupon.json#/~1coupon~1list"
+    },
+    "/coupon/management-list": {
+      "$ref": "./paths/coupon.json#/~1coupon~1management-list"
+    },
+    "/board/like": {
+      "$ref": "./paths/board.json#/~1board~1like"
+    },
+    "/board/article-list": {
+      "$ref": "./paths/board.json#/~1board~1article-list"
+    },
+    "/board/article": {
+      "$ref": "./paths/board.json#/~1board~1article"
+    },
+    "/board/qna-list": {
+      "$ref": "./paths/board.json#/~1board~1qna-list"
+    },
+    "/board/qna": {
+      "$ref": "./paths/board.json#/~1board~1qna"
+    },
+    "/board/story-list": {
+      "$ref": "./paths/board.json#/~1board~1story-list"
+    },
+    "/board/story": {
+      "$ref": "./paths/board.json#/~1board~1story"
+    },
+    "/board/abtest-list": {
+      "$ref": "./paths/board.json#/~1board~1abtest-list"
+    },
+    "/board/abtest": {
+      "$ref": "./paths/board.json#/~1board~1abtest"
+    },
+    "/board/vote": {
+      "$ref": "./paths/board.json#/~1board~1vote"
+    },
+    "/board/reply": {
+      "$ref": "./paths/board.json#/~1board~1reply"
+    },
+    "/board/main-article": {
+      "$ref": "./paths/board.json#/~1board~1main-article"
+    },
+    "/board/with-talk": {
+      "$ref": "./paths/board.json#/~1board~1with-talk"
+    },
+    "/board/hot-story": {
+      "$ref": "./paths/board.json#/~1board~1hot-story"
+    },
+    "/board/hot-talk": {
+      "$ref": "./paths/board.json#/~1board~1hot-talk"
+    },
+    "/author": {
+      "$ref": "./paths/author.json#/~1author"
+    },
+    "/author/product-list": {
+      "$ref": "./paths/author.json#/~1author~1product-list"
+    },
+    "/author/article-list": {
+      "$ref": "./paths/author.json#/~1author~1article-list"
+    },
+    "/author/pass": {
+      "$ref": "./paths/author.json#/~1author~1pass"
+    },
+    "/author/today": {
+      "$ref": "./paths/author.json#/~1author~1today"
+    },
+    "/author/ask": {
+      "$ref": "./paths/author.json#/~1author~1ask"
+    },
+    "/report": {
+      "$ref": "./paths/report.json#/~1report"
+    },
+    "/setting/terms": {
+      "$ref": "./paths/setting.json#/~1setting~1terms"
+    },
+    "/setting/notice-list": {
+      "$ref": "./paths/setting.json#/~1setting~1notice-list"
+    },
+    "/setting/notice": {
+      "$ref": "./paths/setting.json#/~1setting~1notice"
+    },
+    "/setting/faq-list": {
+      "$ref": "./paths/setting.json#/~1setting~1faq-list"
+    },
+    "/setting/faq": {
+      "$ref": "./paths/setting.json#/~1setting~1faq"
+    },
+    "/image/product-image": {
+      "$ref": "./paths/imageFile.json#/~1image~1product-image"
+    },
+    "/image/banner": {
+      "$ref": "./paths/imageFile.json#/~1image~1banner"
+    }
+  },
+  "tags": [
+    {
+      "name": "User",
+      "description": "유저 관련 API"
+    },
+    {
+      "name": "Product",
+      "description": "상품 관련 API"
+    },
+    {
+      "name": "Home",
+      "description": "홈화면 관련 API"
+    },
+    {
+      "name": "Cart",
+      "description": "장바구니 관련 API"
+    },
+    {
+      "name": "Order",
+      "description": "주문 관련 API"
+    },
+    {
+      "name": "Comment",
+      "description": "코멘트 관련 API"
+    },
+    {
+      "name": "Board",
+      "description": "게시글 관련 API"
+    },
+    {
+      "name": "Reply",
+      "description": "댓글 관련 API"
+    },
+    {
+      "name": "Author",
+      "description": "작가 관련 API"
+    },
+    {
+      "name": "Search",
+      "description": "검색 관련 API"
+    },
+    {
+      "name": "My",
+      "description": "나의 정보 관련 API"
+    },
+    {
+      "name": "Report",
+      "description": "신고 관련 API"
+    },
+    {
+      "name": "Coupon",
+      "description": "쿠폰 관련 API"
+    },
+    {
+      "name": "Ask",
+      "description": "ASK 관련 API"
+    },
+    {
+      "name": "Setting",
+      "description": "설정 관련 API"
+    },
+    {
+      "name": "Image",
+      "description": "이미지 관련 API"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Bearer authentication"
+      }
+    },
+    "schemas": {
+      "User": {
+        "$ref": "schema/user.json"
+      },
+      "Product": {
+        "$ref": "schema/product.json"
+      },
+      "ProductList": {
+        "$ref": "schema/productList.json"
+      },
+      "Image": {
+        "$ref": "schema/image.json"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}

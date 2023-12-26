@@ -1,0 +1,72 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "idx": {
+        "type": "number"
+      },
+      "content": {
+        "type": "string"
+      },
+      "createdAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "deletedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "idx": {
+            "type": "number"
+          },
+          "nickname": {
+            "type": "string"
+          },
+          "image": {
+            "$ref": "../schema/image.json"
+          }
+        }
+      },
+      "re": {
+        "tpye": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "idx": {
+              "type": "number"
+            },
+            "content": {
+              "type": "string"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "deletedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "user": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number"
+                },
+                "nickname": {
+                  "type": "string"
+                },
+                "image": {
+                  "$ref": "../schema/image.json"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

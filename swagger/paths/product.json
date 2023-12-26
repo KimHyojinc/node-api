@@ -1,0 +1,428 @@
+{
+  "/product": {
+    "get": {
+      "tags": ["Product"],
+      "summary": "요청한 idx 상품 정보를 가져옵니다.",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "type": "integer",
+          "format": "int64",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schema/product.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Product"],
+      "summary": "상품을 등록합니다.",
+      "produces": ["multipart/form-data"],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "required": true
+                },
+                "category": {
+                  "schema": {
+                    "type": "integer",
+                    "enum": [1, 2, 3, 4, 5, 6, 7]
+                  },
+                  "required": true
+                },
+                "price": {
+                  "type": "number",
+                  "required": true
+                },
+                "stock": {
+                  "type": "boolean",
+                  "required": true,
+                  "default": false
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "description": {
+                  "type": "string",
+                  "required": true
+                },
+                "material": {
+                  "type": "string",
+                  "required": true,
+                  "default": "소재"
+                },
+                "purpose": {
+                  "type": "string",
+                  "required": true,
+                  "default": "목적"
+                },
+                "image": {
+                  "type": "string",
+                  "format": "binary",
+                  "required": true
+                },
+                "isShow": {
+                  "type": "boolean",
+                  "required": true,
+                  "default": true
+                },
+                "isSell": {
+                  "type": "boolean",
+                  "required": true,
+                  "default": true
+                },
+                "deliveryType": {
+                  "schema": {
+                    "type": "number",
+                    "enum": [1, 2, 3]
+                  },
+                  "required": true,
+                  "default": 2
+                },
+                "deliveryFee": {
+                  "type": "number",
+                  "required": true,
+                  "default": 3000
+                },
+                "deliveryFee2": {
+                  "type": "number",
+                  "required": true,
+                  "default": 3000
+                },
+                "deliveryFee3": {
+                  "type": "number",
+                  "required": true,
+                  "default": 3000
+                },
+                "author_idx": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "successful operation"
+        }
+      }
+    }
+  },
+  "/product/list": {
+    "get": {
+      "tags": ["Product"],
+      "summary": "상품 리스트를 가져옵니다.",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "category",
+          "in": "query",
+          "schema": {
+            "type": "number",
+            "enum": [0, 1, 2, 3, 4, 5, 6, 7]
+          },
+          "default": 1,
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": false
+        },
+        {
+          "name": "filter",
+          "in": "query",
+          "type": "string",
+          "enum": ["like", "recently", "review", "price"],
+          "default": "like",
+          "required": false
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "../schema/productList.json"
+                    }
+                  },
+                  "total": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/product/trend": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "트렌드 상품 리스트를 가져옵니다.",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": { "type": "number" },
+                    "name": { "type:": "string" },
+                    "authorName": { "type": "string" },
+                    "isNew": { "type": "boolean" },
+                    "image": { "$ref": "../schema/image.json" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/product/recommend": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "추천 상품 리스트를 가져옵니다.",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": { "type": "number" },
+                    "name": { "type:": "string" },
+                    "price": { "type": "number" },
+                    "authorName": { "type": "string" },
+                    "image": { "$ref": "../schema/image.json" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/product/today": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "Today 상품 리스트를 가져옵니다.",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": { "type": "number" },
+                    "name": { "type:": "string" },
+                    "price": { "type": "number" },
+                    "authorName": { "type": "string" },
+                    "image": { "$ref": "../schema/image.json" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/product/new": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "New 상품 리스트를 가져옵니다.",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "successful operation",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": { "type": "number" },
+                    "name": { "type:": "string" },
+                    "image": { "$ref": "../schema/image.json" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/product/popular": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "popular 상품 리스트를 가져옵니다.",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "category",
+          "in": "query",
+          "schema": {
+            "type": "number",
+            "enum": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "인기 상품 리스트",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": { "type": "number" },
+                    "name": { "type:": "string" },
+                    "image": { "$ref": "../schema/image.json" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/product/like": {
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Product"],
+      "summary": "상품 좋아요 표시를 적용, 삭제 합니다.",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "productIdx": {
+                  "type": "integer",
+                  "format": "int64",
+                  "default": 1,
+                  "required": true
+                },
+                "isLike": {
+                  "type": "boolean",
+                  "default": true,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "성공적으로 처리되었습니다."
+        },
+        "400": {
+          "description": "좋아요 선택 값 없음."
+        },
+        "404": {
+          "description": "유저를 찾을 수 없습니다."
+        }
+      }
+    }
+  },
+  "/product/ask": {
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Ask"],
+      "summary": "상품 ASK 작성",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "문의 내용입니다.",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "ASK 작성 되었습니다."
+        }
+      }
+    }
+  }
+}

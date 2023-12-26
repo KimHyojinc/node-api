@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "idx": {
+      "type": "integer"
+    },
+    "uuis": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "type": {
+      "type": "integer"
+    },
+    "id": {
+      "type": "string"
+    },
+    "nickname": {
+      "type": "string"
+    },
+    "hp": {
+      "type": "string"
+    },
+    "profile_img": {
+      "type": "string"
+    },
+    "author": {
+      "type": "object"
+    }
+  }
+}

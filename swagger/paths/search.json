@@ -1,0 +1,85 @@
+{
+  "/search/keyword-list": {
+    "get": {
+      "tags": ["Search"],
+      "summary": "검색어 목록 (최근, 인기)",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "검색어 목록 (최근, 인기) 조회 성공"
+        }
+      }
+    }
+  },
+  "/search/keyword": {
+    "delete": {
+      "tags": ["Search"],
+      "summary": "검색어 삭제",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "description": "all = 모두지우기 , 숫자인경우 하나씩",
+          "type": "number",
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "검색어 목록 (최근, 인기) 조회 성공"
+        }
+      }
+    }
+  },
+  "/search/list": {
+    "get": {
+      "tags": ["Search"],
+      "summary": "통합 검색 목록",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "keyword",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "default": "나는",
+          "required": true
+        },
+        {
+          "name": "filter",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": ["like", "recently", "review", "price"]
+          },
+          "required": true
+        },
+        {
+          "name": "type",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": ["product", "with", "article"]
+          },
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "통합 검색 성공"
+        }
+      }
+    }
+  }
+}

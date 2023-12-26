@@ -1,0 +1,77 @@
+{
+  "/coupon/list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Coupon"],
+      "summary": "쿠폰 목록",
+      "parameters": [
+        {
+          "name": "productIdxs",
+          "in": "query",
+          "type": "string",
+          "description": "1,2,3,4"
+        }
+      ],
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "쿠폰 목록 불러오기 성공 없으면 빈 배열"
+        }
+      }
+    }
+  },
+  "/coupon/management-list": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Coupon"],
+      "summary": "쿠폰 목록",
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "description": "1,2,3,4"
+        },
+        {
+          "name": "state",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "enum": ["available", "unavailable", "end"]
+          }
+        },
+        {
+          "name": "start",
+          "in": "query",
+          "type": "string",
+          "default": "2022-09-01"
+        },
+        {
+          "name": "end",
+          "in": "query",
+          "type": "string",
+          "default": "2022-09-30"
+        },
+        {
+          "name": "keyword",
+          "in": "query",
+          "type": "string"
+        }
+      ],
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "쿠폰 목록 불러오기 성공 없으면 빈 배열"
+        }
+      }
+    }
+  }
+}

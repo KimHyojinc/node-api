@@ -1,0 +1,288 @@
+{
+  "/cart": {
+    "get": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Cart"],
+      "summary": "장바구니 목록",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "장바구니 목록 불러오기 성공 없으면 빈 배열",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": {
+                      "type": "number"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "productIdx": {
+                      "type": "number"
+                    },
+                    "productName": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "$ref": "../schema/image.json"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "authorIdx": {
+                      "type": "number"
+                    },
+                    "authorName": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Cart"],
+      "summary": "장바구니 추가",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "productIdx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "amount": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "성공적으로 처리되었습니다."
+        }
+      }
+    },
+    "put": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Cart"],
+      "summary": "장바구니 수정",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "amount": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "장바구니 수정"
+        }
+      }
+    },
+    "delete": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Cart"],
+      "summary": "장바구니 삭제",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "장바구니 목록 불러오기 성공 없으면 빈 배열",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": {
+                      "type": "number"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "productIdx": {
+                      "type": "number"
+                    },
+                    "productName": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "$ref": "../schema/image.json"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "authorIdx": {
+                      "type": "number"
+                    },
+                    "authorName": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/cart/temp": {
+    "post": {
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "tags": ["Cart"],
+      "summary": "바로주문",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "productIdx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "amount": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "장바구니 목록 불러오기 성공 없으면 빈 배열",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": {
+                      "type": "number"
+                    },
+                    "amount": {
+                      "type": "number"
+                    },
+                    "productIdx": {
+                      "type": "number"
+                    },
+                    "productName": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "$ref": "../schema/image.json"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "authorIdx": {
+                      "type": "number"
+                    },
+                    "authorName": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/cart/delivery": {
+    "get": {
+      "tags": ["Cart"],
+      "summary": "배달정보",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "description": "카트 IDX",
+          "required": true,
+          "schema": {
+            "type": "number"
+          },
+          "default": 1
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "배송현황"
+        },
+        "400": {
+          "description": "배송오류"
+        }
+      }
+    }
+  }
+}

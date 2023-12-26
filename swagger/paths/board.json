@@ -1,0 +1,1018 @@
+{
+  "/board/like": {
+    "post": {
+      "tags": ["Board"],
+      "summary": "게시글 좋아요",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "isLike": {
+                  "type": "boolean",
+                  "default": true,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "게시글 좋아요 / 좋아요 삭제 완료"
+        }
+      }
+    }
+  },
+  "/board/qna-list": {
+    "get": {
+      "tags": ["Board"],
+      "summary": "QNA 리스트",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "description": "페이지 번호",
+          "required": false,
+          "schema": {
+            "type": "number"
+          },
+          "default": 1
+        },
+        {
+          "name": "filter",
+          "in": "query",
+          "description": "필터 like=인기순, recently=최신순",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": ["like", "recently"]
+          },
+          "default": "like"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "게시글 리스트 조회 성공"
+        }
+      }
+    }
+  },
+  "/board/qna": {
+    "get": {
+      "tags": ["Board"],
+      "summary": "QNA 조회",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "게시글 조회 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idx": {
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "userIdx": {
+                    "type": "number"
+                  },
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "userImage": {
+                    "$ref": "../schema/image.json"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": ["Board"],
+      "summary": "QNA 작성",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "default": "제목입니다",
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "게시글 작성 성공"
+        }
+      }
+    },
+    "put": {
+      "tags": ["Board"],
+      "summary": "QNA 수정",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "title": {
+                  "type": "string",
+                  "default": "제목입니다",
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "게시글 작성 성공"
+        }
+      }
+    },
+    "delete": {
+      "tags": ["Board"],
+      "summary": "QNA 삭제",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "게시글 삭제 성공"
+        }
+      }
+    }
+  },
+  "/board/abtest-list": {
+    "get": {
+      "tags": ["Board"],
+      "summary": "ABTEST 리스트",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "description": "페이지 번호",
+          "required": false,
+          "schema": {
+            "type": "number"
+          },
+          "default": 1
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "게시글 리스트 조회 성공"
+        },
+        "400": {
+          "description": "빠진 값이 있습니다."
+        },
+        "401": {
+          "description": "권한 문제"
+        },
+        "404": {
+          "description": "값을 찾을수 없습니다."
+        }
+      }
+    }
+  },
+  "/board/abtest": {
+    "get": {
+      "tags": ["Board"],
+      "summary": "ABTEST 조회",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "게시글 조회 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idx": {
+                    "type": "number"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "commentCount": {
+                    "type": "number"
+                  },
+                  "deadline": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "winner": {
+                    "type": "number"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "user": {
+                    "type": "object",
+                    "properties": {
+                      "idx": {
+                        "type": "number"
+                      },
+                      "nickname": {
+                        "type": "string"
+                      },
+                      "image": {
+                        "$ref": "../schema/image.json"
+                      }
+                    }
+                  },
+                  "abteset": {
+                    "type": "object",
+                    "properties": {
+                      "select": {
+                        "type": "number"
+                      },
+                      "typeA": {
+                        "$ref": "../schema/image.json"
+                      },
+                      "aCount": {
+                        "type": "number"
+                      },
+                      "typeB": {
+                        "$ref": "../schema/image.json"
+                      },
+                      "bCount": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": ["Board"],
+      "summary": "ABTEST 작성",
+      "produces": ["multipart/form-data"],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다",
+                  "required": true
+                },
+                "deadline": {
+                  "type": "string",
+                  "format": "date",
+                  "required": true
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "binary",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "ABTEST 작성 완료"
+        }
+      }
+    },
+    "put": {
+      "tags": ["Board"],
+      "summary": "ABTEST 수정",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "ABTEST 작성 수정"
+        }
+      }
+    },
+    "delete": {
+      "tags": ["Board"],
+      "summary": "ABTEST 삭제",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ABTEST 삭제 성공"
+        }
+      }
+    }
+  },
+  "/board/vote": {
+    "post": {
+      "tags": ["Board"],
+      "summary": "ABTEST 투표",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "selected": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "ABTEST 조회"
+        }
+      }
+    },
+    "delete": {
+      "tags": ["Board"],
+      "summary": "ABTEST 투표 삭제",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "description": "게시글 번호 board.idx",
+          "required": false,
+          "type": "number",
+          "default": 1
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ABTEST 투표 내역 삭제"
+        }
+      }
+    }
+  },
+  "/board/story-list": {
+    "get": {
+      "tags": ["Board"],
+      "summary": "Story 리스트",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "description": "페이지 번호",
+          "required": false,
+          "type": "number",
+          "default": 1
+        },
+        {
+          "name": "filter",
+          "in": "query",
+          "description": "필터",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": ["like", "recently"]
+          },
+          "default": "like"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "게시글 리스트 조회 성공"
+        },
+        "400": {
+          "description": "빠진 값이 있습니다."
+        },
+        "401": {
+          "description": "권한 문제"
+        },
+        "404": {
+          "description": "값을 찾을수 없습니다."
+        }
+      }
+    }
+  },
+  "/board/story": {
+    "get": {
+      "tags": ["Board"],
+      "summary": "Story 조회",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Story 조회 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idx": {
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "userIdx": {
+                    "type": "number"
+                  },
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "userImage": {
+                    "$ref": "../schema/image.json"
+                  },
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "../schema/image.json"
+                    }
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": ["Board"],
+      "summary": "Story 작성",
+      "produces": ["multipart/form-data"],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "default": "제목입니다",
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다",
+                  "required": true
+                },
+                "tags": {
+                  "type": "string",
+                  "default": "태그1,태그2"
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "binary",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "tags": ["Board"],
+      "summary": "Story 수정",
+      "produces": ["multipart/form-data"],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "idx": {
+                  "type": "number",
+                  "default": "1",
+                  "required": true
+                },
+                "title": {
+                  "type": "string",
+                  "default": "제목입니다",
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다",
+                  "required": true
+                },
+                "tags": {
+                  "type": "string",
+                  "default": "태그1,태그2"
+                },
+                "imageIdxs": {
+                  "type": "string",
+                  "default": "1,2"
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "binary",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "게시글 작성 성공"
+        }
+      }
+    },
+    "delete": {
+      "tags": ["Board"],
+      "summary": "Story 삭제",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Story 삭제 성공"
+        }
+      }
+    }
+  },
+  "/board/article-list": {
+    "get": {
+      "tags": ["Article"],
+      "summary": "아티클 리스트",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "아티클리스트 목록"
+        }
+      }
+    }
+  },
+  "/board/article": {
+    "get": {
+      "tags": ["Article"],
+      "summary": "아티클 상세",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "아티클 상세",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "idx": {
+                        "type": "number"
+                      },
+                      "subject": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "authorName": {
+                        "type": "string"
+                      },
+                      "authorImage": {
+                        "$ref": "../schema/image.json"
+                      },
+                      "isLike": {
+                        "type": "boolean"
+                      },
+                      "likeCount": {
+                        "type": "number"
+                      },
+                      "tags": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "images": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "../schema/image.json"
+                        }
+                      },
+                      "products": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "idx": {
+                              "type": "number"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "authorName": {
+                              "type": "string"
+                            },
+                            "price": {
+                              "type": "number"
+                            },
+                            "image": {
+                              "$ref": "../schema/image.json"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "related": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "idx": {
+                          "type": "number"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "authorName": {
+                          "type": "string"
+                        },
+                        "image": {
+                          "$ref": "../schema/image.json"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": ["Article"],
+      "summary": "아티클 작성",
+      "produces": ["multipart/form-data"],
+      "requestBody": {
+        "content": {
+          "multipart/form-data": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "subject": {
+                  "default": "Magazine",
+                  "schema": {
+                    "type": "string",
+                    "enum": ["매거진", "기획전", "인터뷰"]
+                  }
+                },
+                "tags": {
+                  "type": "string",
+                  "default": "태그1,태그2"
+                },
+                "title": {
+                  "type": "string",
+                  "default": "제목 입니다.",
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다.",
+                  "required": true
+                },
+                "products": {
+                  "type": "string",
+                  "default": "1,2,3",
+                  "required": true
+                },
+                "banner": {
+                  "type": "string",
+                  "format": "binary",
+                  "required": true
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "binary",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "작성완료"
+        }
+      }
+    }
+  },
+  "/board/reply": {
+    "get": {
+      "tags": ["Reply"],
+      "summary": "댓글 리스트",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "boardIdx",
+          "in": "query",
+          "description": "게시물 번호",
+          "required": false,
+          "type": "number",
+          "default": 1
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "댓글 리스트 조회 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schema/replyList.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": ["Reply"],
+      "summary": "댓글 작성",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "boardIdx": {
+                  "type": "number",
+                  "default": 1,
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "댓글입니다.",
+                  "required": true
+                },
+                "reIdx": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "댓글 작성 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schema/replyList.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "tags": ["Reply"],
+      "summary": "댓글 삭제",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "description": "댓글, 대댓글 번호",
+          "required": true,
+          "type": "number",
+          "default": 1
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "댓글 삭제 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schema/replyList.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/board/main-article": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "main Article 리스트",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "main Article 리스트 조회 성공"
+        }
+      }
+    }
+  },
+  "/board/with-talk": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "with Talk 리스트",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "with Talk 리스트 조회 성공"
+        }
+      }
+    }
+  },
+  "/board/hot-story": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "hot story 리스트",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "hot story 리스트 조회 성공"
+        }
+      }
+    }
+  },
+  "/board/hot-talk": {
+    "get": {
+      "tags": ["Home"],
+      "summary": "hot talk 리스트",
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "hot talk 리스트 조회 성공"
+        }
+      }
+    }
+  }
+}

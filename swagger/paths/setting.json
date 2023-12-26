@@ -1,0 +1,274 @@
+{
+  "/setting/terms": {
+    "get": {
+      "tags": ["Setting"],
+      "summary": "약관 불러오기",
+      "description": "type use='이용약관' , privacy='개인정보취급방침', marketing='마케팅활용동의', exit='탈퇴약관'",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "type",
+          "in": "query",
+          "description": "약관 타입",
+          "required": true,
+          "type": "string",
+          "schema": {
+            "type": "string",
+            "enum": ["use", "privacy", "marketing", "exit"]
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "약관 조회 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "data": null,
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/setting/notice-list": {
+    "get": {
+      "tags": ["Setting"],
+      "summary": "공지사항 목록",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "description": "페이지",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "공지사항 목록 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": {
+                      "type": "number"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "Date"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/setting/notice": {
+    "get": {
+      "tags": ["Setting"],
+      "summary": "공지사항 상세",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "공지사항 상세 조회 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idx": {
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "createdAt": {
+                    "type": "Date"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": ["Setting"],
+      "summary": "공지사항 작성",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "default": "제목입니다.",
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다.",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "공지사항 작성 성공"
+        }
+      }
+    }
+  },
+  "/setting/faq-list": {
+    "get": {
+      "tags": ["Setting"],
+      "summary": "FAQ 목록",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "type": "number",
+          "description": "페이지",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "FAQ 목록 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idx": {
+                      "type": "number"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "Date"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/setting/faq": {
+    "get": {
+      "tags": ["Setting"],
+      "summary": "FAQ 상세",
+      "produces": ["application/json"],
+      "parameters": [
+        {
+          "name": "idx",
+          "in": "query",
+          "type": "number",
+          "default": 1,
+          "required": true
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "FAQ 상세 조회 성공",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idx": {
+                    "type": "number"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  },
+                  "createdAt": {
+                    "type": "Date"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "tags": ["Setting"],
+      "summary": "FAQ 작성",
+      "produces": ["application/json"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "default": "제목입니다.",
+                  "required": true
+                },
+                "content": {
+                  "type": "string",
+                  "default": "내용입니다.",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "FAQ 작성 성공"
+        }
+      }
+    }
+  }
+}
